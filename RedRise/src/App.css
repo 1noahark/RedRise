@@ -225,7 +225,7 @@
 }
 
 
-/* HISTORY BUTTON */
+/* HISTORY BUTTON STUFF */
 
 .historybutton {
     padding: 10px 16px;
@@ -245,9 +245,6 @@
     background: #333;
 }
 
-
-/* DARK BACKGROUND */
-
 .historyoverlay {
     position: fixed;
     inset: 0;
@@ -259,8 +256,6 @@
     z-index: 1000;
 }
 
-
-/* POPUP */
 
 .historypopup {
     width: 450px;
@@ -281,7 +276,7 @@
 }
 
 
-/* HEADER */
+/* HEADER THINGY */
 
 .historyheader {
     display: flex;
@@ -315,7 +310,7 @@
 }
 
 
-/* HISTORY ITEMS */
+/* HISTORY STUFF */
 
 .historyitem {
     width: 100%;

@@ -20,10 +20,7 @@ function App() {
     const [selectedBook, setSelectedBook] =
         useState(null);
 
-
-    // ==========================================
     // SELECT BOOK
-    // ==========================================
 
     const selectBook = async (book) => {
 
@@ -104,9 +101,9 @@ function App() {
     };
 
 
-    // ==========================================
+    
     // LOAD CONVERSATION FROM HISTORY
-    // ==========================================
+    
 
     const loadConversation = (conversation) => {
 
@@ -139,9 +136,9 @@ function App() {
     };
 
 
-    // ==========================================
+    
     // SEND MESSAGE
-    // ==========================================
+    
 
     const handleSend = async (userMessage) => {
 
@@ -216,11 +213,6 @@ function App() {
 
     };
 
-
-    // ==========================================
-    // UI
-    // ==========================================
-
     return (
 
         <div>
@@ -267,9 +259,6 @@ function App() {
 
 
             </div>
-
-
-            {/* INPUT */}
 
             <InputField
                 onSend={handleSend}

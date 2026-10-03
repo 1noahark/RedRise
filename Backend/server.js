@@ -11,9 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 
-// ==========================================
 // CREATE CONVERSATION
-// ==========================================
+
 
 app.post("/api/conversations", async (req, res) => {
     try {
@@ -50,9 +49,9 @@ app.post("/api/conversations", async (req, res) => {
 });
 
 
-// ==========================================
+
 // SEND MESSAGE
-// ==========================================
+
 
 app.post(
     "/api/conversations/:id/messages",
@@ -81,9 +80,9 @@ app.post(
             }
 
 
-            // ==========================================
+            
             // BOOK INFORMATION
-            // ==========================================
+            
 
             const bookTitle =
                 conversation.book?.title || "Unknown Book";
@@ -98,9 +97,9 @@ app.post(
             console.log("AUTHOR:", author);
 
 
-            // ==========================================
+            
             // BUILD CONVERSATION HISTORY
-            // ==========================================
+            
 
             const previousMessages =
                 conversation.messages.map((message) => {
@@ -120,9 +119,9 @@ app.post(
                 }).flat();
 
 
-            // ==========================================
+            
             // ASK OLLAMA
-            // ==========================================
+            
 
             const ollamaResponse = await fetch(
                 "http://localhost:11434/api/chat",
@@ -144,35 +143,35 @@ app.post(
                                 role: "system",
 
                                 content: `
-You are RedRise, a book discussion AI.
-
-The user has selected this specific book:
-
-Title: ${bookTitle}
-Author: ${author}
-
-IMPORTANT RULES:
-
-1. You are discussing ONLY "${bookTitle}" by ${author}.
-
-2. Do NOT confuse this book with another book.
-
-3. Do NOT invent characters, locations, events, or plot details.
-
-4. If you are not certain about a fact, say:
-"I don't know."
-
-5. Never replace the characters or setting with characters
-from another book.
-
-6. The user may ask about characters, plot, themes,
-events, or other aspects of the selected book.
-
-7. Keep your answers clear and concise.
-
-Remember:
-The selected book is "${bookTitle}" by ${author}.
-`
+                                You are RedRise, a book discussion AI.
+                                
+                                The user has selected this specific book:
+                                
+                                Title: ${bookTitle}
+                                Author: ${author}
+                                
+                                IMPORTANT RULES:
+                                
+                                1. You are discussing ONLY "${bookTitle}" by ${author}.
+                                
+                                2. Do NOT confuse this book with another book.
+                                
+                                3. Do NOT invent characters, locations, events, or plot details.
+                                
+                                4. If you are not certain about a fact, say:
+                                "I don't know."
+                                
+                                5. Never replace the characters or setting with characters
+                                from another book.
+                                
+                                6. The user may ask about characters, plot, themes,
+                                events, or other aspects of the selected book.
+                                
+                                7. Keep your answers clear and concise.
+                                
+                                Remember:
+                                The selected book is "${bookTitle}" by ${author}.
+                                `
                             },
 
 
@@ -195,9 +194,8 @@ The selected book is "${bookTitle}" by ${author}.
             );
 
 
-            // ==========================================
-            // CHECK OLLAMA
-            // ==========================================
+            
+            // CHECK OLLAMA - CHECKY CHECK
 
             if (!ollamaResponse.ok) {
 
@@ -213,11 +211,8 @@ The selected book is "${bookTitle}" by ${author}.
                     `Ollama returned ${ollamaResponse.status}: ${errorText}`
                 );
             }
-
-
-            // ==========================================
+            
             // GET OLLAMA RESPONSE
-            // ==========================================
 
             const ollamaData =
                 await ollamaResponse.json();
@@ -240,10 +235,7 @@ The selected book is "${bookTitle}" by ${author}.
                 );
             }
 
-
-            // ==========================================
             // SAVE MESSAGE
-            // ==========================================
 
             conversation.messages.push({
 
@@ -257,9 +249,7 @@ The selected book is "${bookTitle}" by ${author}.
             await conversation.save();
 
 
-            // ==========================================
             // RETURN UPDATED CONVERSATION
-            // ==========================================
 
             res.status(201).json(conversation);
 
@@ -280,9 +270,8 @@ The selected book is "${bookTitle}" by ${author}.
 );
 
 
-// ==========================================
 // GET CONVERSATION
-// ==========================================
+
 
 app.get(
     "/api/conversations/:id",
@@ -348,10 +337,7 @@ app.get("/api/conversations", async (req, res) => {
 });
 
 
-// ==========================================
 // MONGODB
-// ==========================================
-
 mongoose
     .connect(process.env.MONGO_URI)
 
